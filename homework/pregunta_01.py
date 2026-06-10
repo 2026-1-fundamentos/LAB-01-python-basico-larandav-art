@@ -14,3 +14,19 @@ def pregunta_01():
     214
 
     """
+
+def read_data():
+    with open("files/data.csv", "r") as f:
+        rows = [line.strip().split('\t') for line in f if line.strip()]
+    return rows
+
+def pregunta_01():
+    """
+    Retorne la suma de la segunda columna.
+
+    Rta/
+    214
+    """
+    with open("files/data.csv", "r") as f:
+        rows = [line.strip().split('\t') for line in f if line.strip()]
+    return sum(int(r[1]) for r in rows)
