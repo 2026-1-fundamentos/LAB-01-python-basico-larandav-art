@@ -19,8 +19,12 @@ from homework import (
 def test_pandas():
     """Check if the code imports pandas."""
 
+    import os
+
     def check_imports_pandas(module_path):
-        with open(module_path, "r", encoding="utf-8") as file:
+        base_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
+        target_path = os.path.normpath(os.path.join(base_dir, module_path))
+        with open(target_path, "r", encoding="utf-8") as file:
             for line in file:
                 if "import pandas" in line or "from pandas" in line:
                     return True
