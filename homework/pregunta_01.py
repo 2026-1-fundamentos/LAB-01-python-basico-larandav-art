@@ -5,7 +5,6 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -14,19 +13,17 @@ def pregunta_01():
     214
 
     """
+    base_dir = __file__.replace("\\", "/").rsplit("/", 1)[0]
+    data_path = base_dir + "/../files/input/data.csv"
+    total = 0
+    with open(data_path, "r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+            if not line:
+                continue
+            parts = line.split("\t")
+            total += int(parts[1])
+    return total
 
-def read_data():
-    with open("files/data.csv", "r") as f:
-        rows = [line.strip().split('\t') for line in f if line.strip()]
-    return rows
 
-def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
 
-    Rta/
-    214
-    """
-    with open("files/data.csv", "r") as f:
-        rows = [line.strip().split('\t') for line in f if line.strip()]
-    return sum(int(r[1]) for r in rows)

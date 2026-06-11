@@ -5,7 +5,6 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
 def pregunta_03():
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como
@@ -15,26 +14,16 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
-def read_data():
-    with open("files/data.csv", "r") as f:
-        rows = [line.strip().split('\t') for line in f if line.strip()]
-    return rows
-
-def pregunta_03():
-    """
-    Retorne la suma de la columna 2 por cada letra de la primera columna como
-    una lista de tuplas (letra, suma) ordendas alfabeticamente.
-
-    Rta/
-    [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
-    """
-    with open("files/data.csv", "r") as f:
-        rows = [line.strip().split('\t') for line in f if line.strip()]
-
-    sumas = {}
-    for r in rows:
-        letra = r[0]
-        val = int(r[1])
-        sumas[letra] = sumas.get(letra, 0) + val
-
-    return sorted(sumas.items())
+    base_dir = __file__.replace("\\", "/").rsplit("/", 1)[0]
+    data_path = base_dir + "/../files/input/data.csv"
+    sums = {}
+    with open(data_path, "r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+            if not line:
+                continue
+            parts = line.split("\t")
+            letter = parts[0]
+            value = int(parts[1])
+            sums[letter] = sums.get(letter, 0) + value
+    return sorted(sums.items())
